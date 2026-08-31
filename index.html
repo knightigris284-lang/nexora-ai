@@ -1709,7 +1709,16 @@ if (!answerBox) {
   button.parentElement.insertBefore(answerBox, button);
 }
 
-answerBox.textContent = data.answer;
+answerBox.innerHTML = data.answer
+  .replace(/&/g, "&amp;")
+  .replace(/</g, "&lt;")
+  .replace(/>/g, "&gt;")
+  .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+  .replace(/^### (.*)$/gm, "<h3>$1</h3>")
+  .replace(/^## (.*)$/gm, "<h2>$1</h2>")
+  .replace(/^# (.*)$/gm, "<h1>$1</h1>")
+  .replace(/^\* (.*)$/gm, "• $1")
+  .replace(/\n/g, "<br>");
 
 answerBox.scrollIntoView({
   behavior: "smooth",
