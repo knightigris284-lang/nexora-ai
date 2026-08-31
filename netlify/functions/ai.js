@@ -2,7 +2,7 @@
 const GEMINI_API_URL =
   "https://generativelanguage.googleapis.com/v1beta/interactions";
 
-const MODEL = "gemini-3.7-flash";
+const MODEL = "gemini-3.6-flash";
 
 const SYSTEM_INSTRUCTION = `
 You are NEXORA AI, an advanced AI study assistant.
