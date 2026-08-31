@@ -123,21 +123,17 @@ export default async function handler(request) {
     );
 
     if (!geminiResponse.ok) {
+  console.error("Gemini error:", JSON.stringify(result));
 
-      console.error(
-        "Gemini error:",
-        JSON.stringify(result)
-      );
-
-      return json(
-        {
-          error: "Gemini API error.",
-          details:
-            result?.error?.message ||
-            "Unknown Gemini error."
-        },
-        502
-      );
+  return json(
+    {
+      error:
+        result?.error?.message ||
+        result?.error?.status ||
+        "Unknown Gemini API error."
+    },
+    502
+  );
     }
 
     let answer = "";
