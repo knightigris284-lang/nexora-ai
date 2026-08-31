@@ -109,7 +109,7 @@ export default async function handler(request) {
           system_instruction: SYSTEM_INSTRUCTION,
 
           generation_config: {
-            thinking_level: "medium"
+            thinking_level: "minimal"
           }
         })
       }
