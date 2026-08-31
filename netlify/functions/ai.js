@@ -1,3 +1,4 @@
+
 const GEMINI_API_URL =
   "https://generativelanguage.googleapis.com/v1beta/interactions";
 
@@ -215,4 +216,4 @@ export default async function handler(request) {
       500
     );
   }
-                          }
+          }
