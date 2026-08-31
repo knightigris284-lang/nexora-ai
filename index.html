@@ -1685,7 +1685,36 @@ async function demoGenerate() {
       throw new Error(data.error || "AI request failed.");
     }
 
-    alert(data.answer);
+    // Show the AI answer inside the study assistant
+let answerBox = document.getElementById("nexora-ai-answer");
+
+if (!answerBox) {
+  answerBox = document.createElement("div");
+  answerBox.id = "nexora-ai-answer";
+
+  answerBox.style.cssText = `
+    margin-top: 18px;
+    padding: 18px;
+    border-radius: 16px;
+    background: rgba(20, 25, 45, 0.95);
+    border: 1px solid rgba(120, 100, 255, 0.35);
+    color: #f7f9ff;
+    font-size: 16px;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    text-align: left;
+    overflow-wrap: anywhere;
+  `;
+
+  button.parentElement.insertBefore(answerBox, button);
+}
+
+answerBox.textContent = data.answer;
+
+answerBox.scrollIntoView({
+  behavior: "smooth",
+  block: "nearest"
+});
 
   } catch (error) {
     console.error(error);
