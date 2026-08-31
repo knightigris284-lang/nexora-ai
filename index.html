@@ -1679,7 +1679,19 @@ async function demoGenerate() {
       })
     });
 
-    const data = await response.json();
+const raw = await response.text();
+
+let data;
+
+try {
+  data = JSON.parse(raw);
+} catch (e) {
+  console.error("AI returned non-JSON:", raw);
+
+  throw new Error(
+    "AI server returned an invalid response. Please check the Netlify function deployment."
+  );
+}
 
     if (!response.ok) {
       throw new Error(data.error || "AI request failed.");
