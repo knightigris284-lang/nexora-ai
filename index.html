@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <meta name="description"
+        content="NEXORA AI — An intelligent student platform for learning, productivity, study tools and academic resources.">
+
+  <meta name="theme-color" content="#0b1020">
+
+  <title>NEXORA AI — Student Intelligence Hub</title>
+
+  <style>
+    /* =========================
+       NEXORA AI
+       Modern Student Platform
+       ========================= */
+
+    :root {
+      --bg: #080b14;
+      --surface: #101522;
+      --surface-2: #151b2b;
+      --border: rgba(255,255,255,0.09);
+      --text: #f5f7ff;
+      --muted: #9da7bd;
+      --primary: #7c5cff;
+      --primary-2: #5b8cff;
+      --success: #35d49a;
+      --danger: #ff6685;
+      --radius: 20px;
+      --max-width: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+      background:
+        radial-gradient(circle at 10% 10%, rgba(124,92,255,.16), transparent 30%),
+        radial-gradient(circle at 90% 20%, rgba(91,140,255,.12), transparent 30%),
+        var(--bg);
+
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .container {
+      width: min(92%, var(--max-width));
+      margin: auto;
+    }
+
+    /* =========================
+       NAVBAR
+       ========================= */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+
+      background: rgba(8,11,20,.78);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 1.35rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+
+    .logo span {
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 26px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: .95rem;
+      transition: .2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-button {
+      border: 0;
+      background: linear-gradient(
+        135deg,
+        var(--primary),
+        var(--primary-2)
+      );
+      color: white;
+      padding: 11px 18px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    /* =========================
+       HERO
+       ========================= */
+
+    .hero {
+      padding: 90px 0 70px;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      padding: 8px 14px;
+      border-radius: 999px;
+
+      background: rgba(124,92,255,.12);
+      border: 1px solid rgba(124,92,255,.25);
+
+      color: #c9beff;
+      font-size: .85rem;
+      font-weight: 700;
+
+      margin-bottom: 22px;
+    }
+
+    .hero h1 {
+      max-width: 850px;
+      margin: auto;
+
+      font-size: clamp(2.6rem, 7vw, 5.8rem);
+      line-height: .98;
+      letter-spacing: -0.07em;
+    }
+
+    .gradient-text {
+      background:
+        linear-gradient(
+          135deg,
+          #ffffff,
+          #9d8aff,
+          #62a0ff
+        );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: 25px auto 0;
+
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.2rem);
+    }
+
+    .hero-actions {
+      margin-top: 32px;
+
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .primary-button,
+    .secondary-button {
+      padding: 14px 22px;
+      border-radius: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      transition: .2s ease;
+    }
+
+    .primary-button {
+      background: linear-gradient(
+        135deg,
+        var(--primary),
+        var(--primary-2)
+      );
+      color: white;
+      border: 0;
+    }
+
+    .secondary-button {
+      background: var(--surface);
+      color: var(--text);
+    }
+
+    .primary-button:hover,
+    .secondary-button:hover,
+    .nav-button:hover {
+      transform: translateY(-2px);
+    }
+
+    /* =========================
+       SEARCH
+       ========================= */
+
+    .search-area {
+      margin: 10px auto 55px;
+      max-width: 700px;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      background: var(--surface);
+      border: 1px solid var(--border);
+
+      padding: 8px;
+      border-radius: 16px;
+    }
+
+    .search-box input {
+      width: 100%;
+      border: 0;
+      outline: 0;
+
+      background: transparent;
+      color: var(--text);
+
+      padding: 12px;
+    }
+
+    .search-box input::placeholder {
+      color: #707a90;
+    }
+
+    /* =========================
+       SECTION
+       ========================= */
+
+    section {
+      padding: 70px 0;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -0.04em;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    /* =========================
+       TOOL CARDS
+       ========================= */
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(auto-fit, minmax(240px, 1fr));
+
+      gap: 18px;
+    }
+
+    .tool-card {
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,.045),
+          rgba(255,255,255,.015)
+        );
+
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+
+      padding: 25px;
+
+      transition:
+        transform .25s ease,
+        border-color .25s ease,
+        background .25s ease;
+    }
+
+    .tool-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(124,92,255,.45);
+      background: var(--surface-2);
+    }
+
+    .tool-icon {
+      width: 52px;
+      height: 52px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 15px;
+
+      background: rgba(124,92,255,.13);
+
+      font-size: 1.5rem;
+      margin-bottom: 18px;
+    }
+
+    .tool-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 8px;
+    }
+
+    .tool-card p {
+      color: var(--muted);
+      font-size: .92rem;
+      margin-bottom: 18px;
+    }
+
+    .tool-link {
+      color: #a99aff;
+      font-weight: 800;
+      font-size: .9rem;
+    }
+
+    /* =========================
+       STATS
+       ========================= */
+
+    .stats {
+      display: grid;
+      grid-template-columns:
+        repeat(auto-fit, minmax(180px, 1fr));
+
+      gap: 16px;
+      margin-top: 25px;
+    }
+
+    .stat {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 25px;
+      border-radius: var(--radius);
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 2rem;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    /* =========================
+       CTA
+       ========================= */
+
+    .cta {
+      background:
+        linear-gradient(
+          135deg,
+          rgba(124,92,255,.18),
+          rgba(91,140,255,.08)
+        );
+
+      border: 1px solid rgba(124,92,255,.2);
+      border-radius: 28px;
+
+      padding: 55px 25px;
+      text-align: center;
+    }
+
+    .cta h2 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      letter-spacing: -0.05em;
+    }
+
+    .cta p {
+      max-width: 600px;
+      margin: 12px auto 25px;
+      color: var(--muted);
+    }
+
+    /* =========================
+       FOOTER
+       ========================= */
+
+    footer {
+      border-top: 1px solid var(--border);
+      margin-top: 50px;
+      padding: 35px 0;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    footer p {
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    /* =========================
+       MOBILE
+       ========================= */
+
+    @media (max-width: 700px) {
+
+      .nav {
+        min-height: 64px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 65px;
+      }
+
+      section {
+        padding: 50px 0;
+      }
+
+      .tools-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .primary-button,
+      .secondary-button {
+        width: 100%;
+      }
+    }
+
+    /* =========================
+       ACCESSIBILITY
+       ========================= */
+
+    :focus-visible {
+      outline: 3px solid rgba(124,92,255,.6);
+      outline-offset: 3px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       NAVIGATION
+       ========================= -->
+
+  <header>
+    <div class="container nav">
+
+      <a href="#" class="logo">
+        NEXORA<span>AI</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#tools">AI Tools</a>
+        <a href="#features">Features</a>
+        <a href="#about">About</a>
+      </nav>
+
+      <button
+        class="nav-button"
+        onclick="scrollToTools()">
+        Explore Tools
+      </button>
+
+    </div>
+  </header>
+
+
+  <!-- =========================
+       HERO
+       ========================= -->
+
+  <main>
+
+    <section class="hero">
+
+      <div class="container">
+
+        <div class="badge">
+          ✦ The Future of Student Intelligence
+        </div>
+
+        <h1>
+          Study smarter with
+          <span class="gradient-text">
+            NEXORA AI
+          </span>
+        </h1>
+
+        <p>
+          One intelligent workspace for students —
+          AI learning tools, productivity features,
+          academic resources and smarter study workflows.
+        </p>
+
+        <div class="hero-actions">
+
+          <button
+            class="primary-button"
+            onclick="scrollToTools()">
+            Explore AI Tools →
+          </button>
+
+          <button
+            class="secondary-button"
+            onclick="showMessage()">
+            Learn More
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         SEARCH
+         ========================= -->
+
+    <div class="container search-area">
+
+      <div class="search-box">
+
+        <span>🔎</span>
+
+        <input
+          id="toolSearch"
+          type="search"
+          placeholder="Search AI tools..."
+          aria-label="Search AI tools">
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         AI TOOLS
+         ========================= -->
+
+    <section id="tools">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <h2>Student AI Toolkit</h2>
+
+          <p>
+            Everything you need to learn,
+            create and stay productive.
+          </p>
+
+        </div>
+
+
+        <div class="tools-grid" id="toolsGrid">
+
+          <article class="tool-card"
+                   data-name="ai study assistant">
+
+            <div class="tool-icon">🧠</div>
+
+            <h3>AI Study Assistant</h3>
+
+            <p>
+              Get help understanding difficult
+              concepts and study topics.
+            </p>
+
+            <a href="#" class="tool-link"
+               onclick="comingSoon(event)">
+              Open Tool →
+            </a>
+
+          </article>
+
+
+          <article class="tool-card"
+                   data-name="summarizer notes">
+
+            <div class="tool-icon">📝</div>
+
+            <h3>Smart Summarizer</h3>
+
+            <p>
+              Turn long study material into
+              clear and useful summaries.
+            </p>
+
+            <a href="#" class="tool-link"
+               onclick="comingSoon(event)">
+              Open Tool →
+            </a>
+
+          </article>
+
+
+          <article class="tool-card"
+                   data-name="quiz generator">
+
+            <div class="tool-icon">🎯</div>
+
+            <h3>Quiz Generator</h3>
+
+            <p>
+              Create practice questions to
+              test your knowledge.
+            </p>
+
+            <a href="#" class="tool-link"
+               onclick="comingSoon(event)">
+              Open Tool →
+            </a>
+
+          </article>
+
+
+          <article class="tool-card"
+                   data-name="flashcards">
+
+            <div class="tool-icon">🗂️</div>
+
+            <h3>AI Flashcards</h3>
+
+            <p>
+              Build smart revision flashcards
+              from your study material.
+            </p>
+
+            <a href="#" class="tool-link"
+               onclick="comingSoon(event)">
+              Open Tool →
+            </a>
+
+          </article>
+
+
+          <article class="tool-card"
+                   data-name="essay writing">
+
+            <div class="tool-icon">✍️</div>
+
+            <h3>Writing Assistant</h3>
+
+            <p>
+              Improve essays, assignments,
+              grammar and academic writing.
+            </p>
+
+            <a href="#" class="tool-link"
+               onclick="comingSoon(event)">
+              Open Tool →
+            </a>
+
+          </article>
+
+
+          <article class="tool-card"
+                   data-name="study planner productivity">
+
+            <div class="tool-icon">📅</div>
+
+            <h3>Study Planner</h3>
+
+            <p>
+              Organize your study sessions,
+              goals and academic workload.
+            </p>
+
+            <a href="#" class="tool-link"
+               onclick="comingSoon(event)">
+              Open Tool →
+            </a>
+
+          </article>
+
+
+          <article class="tool-card"
+                   data-name="code assistant programming">
+
+            <div class="tool-icon">💻</div>
+
+            <h3>Code Assistant</h3>
+
+            <p>
+              Understand programming concepts
+              and solve coding problems.
+            </p>
+
+            <a href="#" class="tool-link"
+               onclick="comingSoon(event)">
+              Open Tool →
+            </a>
+
+          </article>
+
+
+          <article class="tool-card"
+                   data-name="career assistant">
+
+            <div class="tool-icon">🚀</div>
+
+            <h3>Career Assistant</h3>
+
+            <p>
+              Explore skills, career paths,
+              resumes and opportunities.
+            </p>
+
+            <a href="#" class="tool-link"
+               onclick="comingSoon(event)">
+              Open Tool →
+            </a>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         FEATURES
+         ========================= -->
+
+    <section id="features">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <h2>Built for modern students</h2>
+
+          <p>
+            A single place to make learning
+            faster, simpler and more organized.
+          </p>
+
+        </div>
+
+
+        <div class="stats">
+
+          <div class="stat">
+            <strong>AI</strong>
+            <span>Powered Learning</span>
+          </div>
+
+          <div class="stat">
+            <strong>24/7</strong>
+            <span>Study Companion</span>
+          </div>
+
+          <div class="stat">
+            <strong>∞</strong>
+            <span>Learning Possibilities</span>
+          </div>
+
+          <div class="stat">
+            <strong>1</strong>
+            <span>Student Workspace</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         CTA
+         ========================= -->
+
+    <section id="about">
+
+      <div class="container">
+
+        <div class="cta">
+
+          <h2>
+            Your smarter study journey starts here.
+          </h2>
+
+          <p>
+            NEXORA AI is designed to bring useful
+            AI-powered student tools together in
+            one simple and modern experience.
+          </p>
+
+          <button
+            class="primary-button"
+            onclick="scrollToTools()">
+            Start Exploring →
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================
+       FOOTER
+       ========================= -->
+
+  <footer>
+
+    <div class="container footer-content">
+
+      <a href="#" class="logo">
+        NEXORA<span>AI</span>
+      </a>
+
+      <p>
+        © <span id="year"></span>
+        NEXORA AI. Built for smarter students.
+      </p>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =========================
+       JAVASCRIPT
+       ========================= -->
+
+  <script>
+
+    // Current year
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+
+    // Scroll to tools
+    function scrollToTools() {
+      document
+        .getElementById("tools")
+        .scrollIntoView({
+          behavior: "smooth"
+        });
+    }
+
+
+    // Learn more message
+    function showMessage() {
+      alert(
+        "NEXORA AI is your intelligent student workspace. More features are coming soon!"
+      );
+    }
+
+
+    // Coming soon
+    function comingSoon(event) {
+
+      event.preventDefault();
+
+      alert(
+        "🚀 This NEXORA AI tool is coming soon!"
+      );
+    }
+
+
+    // Tool search
+    const searchInput =
+      document.getElementById("toolSearch");
+
+    const toolCards =
+      document.querySelectorAll(".tool-card");
+
+
+    searchInput.addEventListener("input", function () {
+
+      const search =
+        this.value.toLowerCase().trim();
+
+      toolCards.forEach(function (card) {
+
+        const name =
+          card.dataset.name.toLowerCase();
+
+        if (name.includes(search)) {
+          card.classList.remove("hidden");
+        } else {
+          card.classList.add("hidden");
+        }
+
+      });
+
+    });
+
+  </script>
+
+</body>
+  </html>
