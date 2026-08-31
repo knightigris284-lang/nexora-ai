@@ -1688,9 +1688,9 @@ try {
 } catch (e) {
   console.error("AI returned non-JSON:", raw);
 
-  throw new Error(
-    "AI server returned an invalid response. Please check the Netlify function deployment."
-  );
+throw new Error(
+  "Netlify AI function error: " + raw.substring(0, 300)
+);
 }
 
     if (!response.ok) {
