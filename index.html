@@ -1655,26 +1655,47 @@
        DEMO AI RESPONSE
        ========================= */
 
-    function demoGenerate() {
+async function demoGenerate() {
+  const text = prompt.value.trim();
 
-      const text =
-        prompt.value.trim();
+  if (!text) {
+    alert("Please enter something first.");
+    return;
+  }
 
-      if (!text) {
+  const button = document.querySelector(".generate");
 
-        alert(
-          "Please enter something first."
-        );
+  button.disabled = true;
+  button.textContent = "NEXORA AI is thinking...";
 
-        return;
-      }
+  try {
+    const response = await fetch("/.netlify/functions/ai", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        prompt: text
+      })
+    });
 
-      alert(
-        "NEXORA AI interface is ready. " +
-        "The secure AI backend will be connected next."
-      );
+    const data = await response.json();
 
+    if (!response.ok) {
+      throw new Error(data.error || "AI request failed.");
     }
+
+    alert(data.answer);
+
+  } catch (error) {
+    console.error(error);
+    alert("NEXORA AI error: " + error.message);
+
+  } finally {
+    button.disabled = false;
+    button.textContent = "Generate with NEXORA AI →";
+  }
+}
 
 
     /* =========================
